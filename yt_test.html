@@ -1,0 +1,52 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript">	
+		var add_counter = 0;
+        $(document).ready(function () {		
+		
+			$('#add_container').on('click', '.change_video', function() {
+				var id = $(this).data("id");					
+				var new_link = $("#link_"+id).val();				
+				var replacedUrl = new_link.replace(/\/watch\?v=/, '/embed/');							
+				$("#ifram_container").html("");				
+				$("#ifram_container").html('<iframe id="yt_video_link" width="560" height="315" src="'+replacedUrl+'" allowfullscreen></iframe>');
+				$("#now_watching").text(replacedUrl);
+				$("#watched_"+id).text("Watched");
+				addnew();				
+			});
+			
+			$('#add_container').on('click', '.remove_video', function() {
+				var id = $(this).data("id");				
+				$("#div_"+id).remove();						
+			});
+
+			
+			$('.addnew').on('click', function (ev){			
+				addnew();
+			});
+			
+			addnew();
+			
+			
+			function addnew(){
+				$('#add_container').append('<div id="div_'+add_counter+'"><input class="new_link" id = "link_'+add_counter+'" type="text"></input>' +
+				'<button data-id="'+add_counter+'" id = "add_'+add_counter+'" class="change_video">Change</button>'  +
+				'<button data-id="'+add_counter+'" id = "remove_'+add_counter+'" class="remove_video">Remove</button><span id="watched_'+add_counter+'"></span></div>'				
+				);
+				add_counter++;
+			}
+			
+        });
+    </script>
+</head>
+<div id="ifram_container"></div>
+<br>
+Now watching:
+<br>
+<span id='now_watching'></span>
+<br>
+<button class ="addnew">Add new</button>
+
+<div id="add_container"></div>
+</html>
