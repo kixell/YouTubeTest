@@ -9,8 +9,8 @@
 				var id = $(this).data("id");					
 				var new_link = $("#link_"+id).val();				
 				var replacedUrl = new_link.replace(/\/watch\?v=/, '/embed/');							
-				$("#ifram_container").html("");				
-				$("#ifram_container").html('<iframe id="yt_video_link" width="560" height="315" src="'+replacedUrl+'" allowfullscreen></iframe>');
+				$("#yt_container").html("");				
+				$("#yt_container").html('<iframe id="yt_video_link" width="560" height="315" src="'+replacedUrl+'" allowfullscreen></iframe>');
 				$("#now_watching").text(replacedUrl);
 				$("#watched_"+id).text("Watched");
 				addnew();				
@@ -40,7 +40,7 @@
         });
     </script>
 </head>
-<div id="ifram_container"></div>
+<div id="yt_container"></div>
 <br>
 Now watching:
 <br>
