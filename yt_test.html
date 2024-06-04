@@ -18,7 +18,7 @@
 			
 			$('#add_container').on('click', '.remove_video', function() {
 				var id = $(this).data("id");				
-				$("#div_"+id).remove();						
+				$("#div_"+id).remove(); 
 			});
 
 			
@@ -26,7 +26,21 @@
 				addnew();
 			});
 			
-			addnew();
+			
+			
+			var urlParams = new URLSearchParams(window.location.search);
+			var parameterValue = urlParams.get('v');
+			
+			
+			if (parameterValue != null)
+			{
+				addWithLink(parameterValue);
+			}
+			else
+			{
+				addnew();
+			}
+			
 			
 			
 			function addnew(){
@@ -37,8 +51,28 @@
 				add_counter++;
 			}
 			
+			function addWithLink(url){
+
+				$('#add_container').append('<div id="div_'+add_counter+'"><input class="new_link" id = "link_'+add_counter+'" type="text" value="https://www.youtube.com/watch?v='+url+'"></input>' +
+				'<button data-id="'+add_counter+'" id = "add_'+add_counter+'" class="change_video">Change</button>'  +
+				'<button data-id="'+add_counter+'" id = "remove_'+add_counter+'" class="remove_video">Remove</button><span id="watched_'+add_counter+'"></span></div>'				
+				);
+				
+				autoStart(add_counter);
+				add_counter++;				
+			}
+			
+			function autoStart(id){
+				$('#add_'+id).click();
+			}
+			
         });
     </script>
+	<style>
+		input{
+			width: 500px;
+		}
+	</style>
 </head>
 <div id="yt_container"></div>
 <br>
